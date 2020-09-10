@@ -93,7 +93,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - **[ESLint](https://eslint.org/)**
 - **[Prettier](https://prettier.io/)**
 
-> Veja o arquivo [package.json](https://github.com/douglasbelarmino/frontend-developer-challenge-at-compasso/blob/master/server/package.json)
+> Veja o arquivo [package.json](https://github.com/douglasbelarmino/frontend-developer-challenge-at-compasso/blob/master/package.json)
 
 #### **Utilitários**
 
