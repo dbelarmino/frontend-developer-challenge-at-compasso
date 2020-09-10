@@ -127,7 +127,7 @@ const Container = styled.div`
     transition: transform 400ms;
   }
 
-  article .repositories button[data-show='true'] i {
+  article .repositories button[data-show-repositories='true'] i {
     transform: rotate(-180deg);
   }
 
@@ -139,7 +139,7 @@ const Container = styled.div`
     transition: height 400ms;
   }
 
-  article .repositories button[data-show='true'] ~ ul {
+  article .repositories button[data-show-repositories='true'] ~ ul {
     height: 50rem;
   }
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { IUser } from '../Home'
 import api from '../../services/api'
@@ -12,14 +12,10 @@ interface IRepository {
 }
 
 const Detail: React.FC = (props) => {
-  const [status, setStatus] = useState(false)
+  const [showRepositoriesList, setShowRepositoriesList] = useState(false)
   const [repositories, setRepositories] = useState<[IRepository]>()
-
   const user = useLocation().state as IUser
 
-  useEffect(() => {
-    console.log(user)
-  }, [user])
   const history = useHistory()
 
   const handleGetRepositories = useCallback(async () => {
@@ -81,11 +77,11 @@ const Detail: React.FC = (props) => {
             type="button"
             onClick={() => {
               handleGetRepositories()
-              setStatus(!status)
+              setShowRepositoriesList(!showRepositoriesList)
             }}
-            data-show={status}
+            data-show-repositories={showRepositoriesList}
           >
-            Repositório
+            Repositórios
             <i id="arrow-icon" className="material-icons">
               &#xe313;
             </i>
