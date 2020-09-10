@@ -18,7 +18,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background: #fff;
+    background: rgba(230, 232, 239, 0.4);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -27,11 +27,16 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 1.7rem !important;
-    color: #000;
+    color: #CE1483;
   }
 
   a, button{
     -webkit-tap-highlight-color: transparent !important;
+  }
+
+  ::selection{
+    background: #CE1483;
+    color: #fff;
   }
 
 `
