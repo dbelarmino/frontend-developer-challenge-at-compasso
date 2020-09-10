@@ -36,7 +36,7 @@ const Home: React.FC = () => {
   return (
     <Container>
       <header>
-        <h1>Conheça novos desevolvedores</h1>
+        <h1>Conheça novos desenvolvedores</h1>
 
         <form onSubmit={handleSubmit}>
           <input
