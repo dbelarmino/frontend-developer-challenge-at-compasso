@@ -1,72 +1,71 @@
-import React, { useCallback, FormEvent } from 'react'
+import React, { useCallback, FormEvent, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-
+import api from '../../services/api'
 import Container from './styles'
 
+export interface IUser {
+  avatar_url: string
+  login: string
+  name: string
+  bio: string
+  location: string
+  company: string
+  twitter_username: string
+}
+
 const Home: React.FC = () => {
+  const [username, setUsername] = useState('')
+  const [user, setUser] = useState<IUser>()
+
   const history = useHistory()
 
-  const handleSubmit = useCallback((event: FormEvent) => {
-    event.preventDefault()
-  }, [])
+  const handleSubmit = useCallback(
+    async (event: FormEvent) => {
+      event.preventDefault()
+
+      const response = await api.get<IUser>(`${username}`)
+      if (response.status !== 404) setUser(response.data)
+    },
+    [username],
+  )
 
   const navigateToDetail = useCallback(() => {
-    history.push('/douglasbelarmino')
-  }, [history])
+    history.push(`/${user?.login}`, user)
+  }, [history, user])
 
   return (
     <Container>
       <header>
-        <h1>Conheça Devs</h1>
+        <h1>Conheça novos desevolvedores</h1>
 
         <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="Digite o nome de usuário" />
+          <input
+            type="text"
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+            placeholder="Digite o nome de usuário"
+            required
+          />
+
           <button type="submit">Pesquisar</button>
         </form>
       </header>
 
       <main>
-        <article>
-          <img
-            src="https://avatars3.githubusercontent.com/u/36802445?s=460&u=9af2af554d1947d09b9bf2e9cfb06d2f1ece22f7&v=4"
-            alt=""
-          />
-          <div>
-            <span>Douglas Belarmino</span>
-            <span>
-              Desenvolvedor Web Fullstack ReactJS | Node.js Lorem ipsum dolor
-              sit amet consectetur adipisicing elit. Repellendus quis nulla
-              optio iste porro nihil maiores accusamus culpa distinctio in
-              necessitatibus nemo debitis, accusantium nostrum delectus!
-              Incidunt neque accusantium reprehenderit!
-            </span>
-            <button type="button" onClick={navigateToDetail}>
-              Conhecer
-            </button>
-          </div>
+        {user?.login && (
+          <article>
+            <img src={user.avatar_url} alt={user.name} />
 
-          {/* <ul className="repos-list">
-              <li>
-                <span className="repo-name">Test 1</span>
-                <span className="repo-description">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id
-                  magni repellat vero ipsam dolore neque quam iusto quidem ut
-                  reiciendis accusamus ipsum mollitia possimus enim, voluptas,
-                  ratione quod! Est, tenetur.
-                </span>
-              </li>
+            <div>
+              <span>{user.name}</span>
+              <span>{user.bio}</span>
 
-              <li>
-                <span className="repo-name">Test 1</span>
-                <span className="repo-description">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id
-                  magni repellat vero ipsam dolore neque quam iusto quidem ut
-                  reiciendis accusamus ipsum mollitia possimus enim, voluptas,
-                  ratione quod! Est, tenetur.
-                </span>
-              </li>
-            </ul> */}
-        </article>
+              <button type="button" onClick={navigateToDetail}>
+                Conhecer
+              </button>
+            </div>
+          </article>
+        )}
       </main>
     </Container>
   )

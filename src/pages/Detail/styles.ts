@@ -68,7 +68,8 @@ const Container = styled.div`
     text-align: center;
   }
 
-  article .about a.twitter-btn {
+  article .about a.twitter-btn,
+  article .about a.company-github-btn {
     color: #ce1483;
   }
 
